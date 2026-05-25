@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TRB Weekly Feedback Report</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 48px 40px;
+  }
+
+  /* ── HEADER ── */
+  .header { text-align: center; margin-bottom: 40px; }
+  .header-tag {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #f15a26;
+    margin-bottom: 8px;
+  }
+  .header h1 {
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    line-height: 1.1;
+  }
+  .header h2 {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #f15a26;
+    margin-top: 6px;
+  }
+  .header .location {
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: #999;
+    margin-top: 4px;
+  }
+  .header .date-range {
+    font-size: 11px;
+    color: #bbb;
+    margin-top: 4px;
+    letter-spacing: 1px;
+  }
+  .divider {
+    border: none;
+    border-top: 2px solid #f15a26;
+    margin: 24px 0;
+  }
+  .divider.thin {
+    border-top: 1px solid #eee;
+    margin: 28px 0;
+  }
+
+  /* ── QUANTITATIVE TABLE ── */
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #f15a26;
+    margin-bottom: 14px;
+    font-weight: 700;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin-bottom: 8px;
+  }
+  thead tr {
+    background: #1a1a1a;
+    color: #fff;
+  }
+  thead th {
+    padding: 11px 16px;
+    text-align: left;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  tbody tr {
+    border-bottom: 1px solid #f0f0f0;
+  }
+  tbody td {
+    padding: 12px 16px;
+    color: #1a1a1a;
+    font-size: 13px;
+  }
+  .badge-green {
+    display: inline-block;
+    background: #e8f5e9;
+    color: #2e7d32;
+    border-radius: 12px;
+    padding: 3px 12px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .badge-orange {
+    display: inline-block;
+    background: #fff3ee;
+    color: #f15a26;
+    border-radius: 12px;
+    padding: 3px 12px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+  .badge-gray {
+    display: inline-block;
+    background: #f5f5f5;
+    color: #555;
+    border-radius: 12px;
+    padding: 3px 12px;
+    font-size: 12px;
+    font-weight: 700;
+  }
+
+  /* ── FEEDBACK TABLES ── */
+  .feedback-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 4px;
+  }
+
+  .feedback-col-header {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 9px 14px;
+    border-radius: 4px 4px 0 0;
+    margin-bottom: 0;
+  }
+  .col-working { background: #2e7d32; color: #fff; }
+  .col-better  { background: #f15a26; color: #fff; }
+
+  .feedback-item {
+    border: 1px solid #eee;
+    border-top: none;
+    padding: 16px 14px;
+    margin-bottom: 0;
+  }
+  .feedback-item:not(:last-child) { border-bottom: 1px solid #f0f0f0; }
+  .feedback-item:last-child { border-radius: 0 0 4px 4px; }
+
+  .feedback-heading {
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: #1a1a1a;
+    margin-bottom: 5px;
+  }
+  .feedback-desc {
+    font-size: 12px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 7px;
+  }
+  .feedback-quote {
+    font-size: 12px;
+    color: #1a1a1a;
+    font-style: italic;
+    line-height: 1.6;
+    border-left: 3px solid #f15a26;
+    padding-left: 10px;
+    margin-bottom: 5px;
+  }
+  .col-working-section .feedback-quote { border-left-color: #2e7d32; }
+
+  .feedback-stars {
+    font-size: 11px;
+    color: #999;
+    text-align: right;
+  }
+
+  /* ── KEY TAKEAWAY ── */
+  .takeaway {
+    background: #fff8f5;
+    border: 1px solid #f15a26;
+    border-radius: 6px;
+    padding: 20px 22px;
+    margin-top: 28px;
+  }
+  .takeaway-label {
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #f15a26;
+    margin-bottom: 8px;
+  }
+  .takeaway-list {
+    font-size: 13px;
+    color: #333;
+    line-height: 1.8;
+    padding-left: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .takeaway-list strong { color: #1a1a1a; }
+
+  .stars-gold { color: #f5a623; }
+</style>
+</head>
+<body>
+
+<!-- ── HEADER ── -->
+<div class="header">
+  <div class="header-tag">Guest Feedback</div>
+  <h1>Tokyo Record Bar</h1>
+  <h2>Weekly Feedback Report</h2>
+  <div class="location">West Village · New York City</div>
+  <div class="date-range">May 11 – May 22, 2026</div>
+</div>
+
+<hr class="divider">
+
+<!-- ── QUANTITATIVE SUMMARY ── -->
+<div class="section-label">Quantitative Summary</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Source</th>
+      <th>Reviews This Period</th>
+      <th>Avg Rating</th>
+      <th>5 Stars</th>
+      <th>Needs Attention (1–4★)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Google Reviews</strong></td>
+      <td><span class="badge-gray">18</span></td>
+      <td><span class="badge-green">4.6 ★</span></td>
+      <td><span class="badge-green">15</span></td>
+      <td><span class="badge-orange">3</span></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr class="divider thin">
+
+<!-- ── FEEDBACK TABLES ── -->
+<div class="section-label">Guest Feedback Breakdown</div>
+
+<div class="feedback-grid">
+
+  <!-- WHAT'S WORKING -->
+  <div class="col-working-section">
+    <div class="feedback-col-header col-working">✓ What's Working</div>
+
+    <div class="feedback-item">
+      <div class="feedback-heading">Staff Going Above & Beyond</div>
+      <div class="feedback-desc">Guest praises the host for saving a botched reservation, and calls out warmth from the bar and DJ staff by name.</div>
+      <div class="feedback-quote">"The host, Nate was so kind and accommodating. I accidentally messed up my reso but he found us a spot for a later seating."</div>
+      <div class="feedback-stars"><span class="stars-gold">★★★★★</span></div>
+    </div>
+
+    <div class="feedback-item">
+      <div class="feedback-heading">Overall Vibe & First-Class Experience</div>
+      <div class="feedback-desc">Guest describes the full experience — food, service, and vibe — as first class and unlike anywhere else.</div>
+      <div class="feedback-quote">"A unique experience, very cool place if you like a different way of dining. Food, service and vibe were first class."</div>
+      <div class="feedback-stars"><span class="stars-gold">★★★★★</span></div>
+    </div>
+
+    <div class="feedback-item">
+      <div class="feedback-heading">Cocktails & Bar Energy</div>
+      <div class="feedback-desc">Walk-in guest after a comedy show raves about the cocktails and calls out their server by name, recommending TRB as a top NYC stop.</div>
+      <div class="feedback-quote">"The cocktails were amazing! Made one of the best cocktails I've had in New York. If you come to New York put this on the top of your list."</div>
+      <div class="feedback-stars"><span class="stars-gold">★★★★★</span></div>
+    </div>
+  </div>
+
+  <!-- COULD BE BETTER -->
+  <div>
+    <div class="feedback-col-header col-better">↑ Could Be Better</div>
+
+    <div class="feedback-item">
+      <div class="feedback-heading">Omakase Fish Portions & Value</div>
+      <div class="feedback-desc">Guest felt the omakase underdelivered on fish for the price, with only 2 of 7 courses containing actual fish and one course shared with a stranger.</div>
+      <div class="feedback-quote">"This is the lightest omakase I've ever been to — only 7 courses and only 2 had any actual fish."</div>
+      <div class="feedback-stars">★☆☆☆☆</div>
+    </div>
+
+    <div class="feedback-item">
+      <div class="feedback-heading">Pairing Presentation by Servers</div>
+      <div class="feedback-desc">Same guest flags that pairings were pitched without explaining what's included or the price, leaving guests to ask themselves.</div>
+      <div class="feedback-quote">"Just a quick fly-by of 'would you like the cocktail, wine, or NA pairing?' You should mention what exactly the pairings are and what the prices are."</div>
+      <div class="feedback-stars">★☆☆☆☆</div>
+    </div>
+
+    <div class="feedback-item">
+      <div class="feedback-heading">Vegetarian Menu Protein Options</div>
+      <div class="feedback-desc">Guest on the vegetarian prefix felt the entree courses lacked protein, specifically calling out the absence of tofu or a suitable alternative.</div>
+      <div class="feedback-quote">"The asparagus in cream sauce and the broccolini with garlic chips as the entree was uncalled for. There should be at least tofu or something."</div>
+      <div class="feedback-stars">★★★☆☆</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ── KEY TAKEAWAY ── -->
+<div class="takeaway">
+  <div class="takeaway-label">Key Takeaway</div>
+  <ul class="takeaway-list">
+    <li><strong>15 of 18 reviews are 5 stars</strong> — the bar and cocktail experience is landing exceptionally well, with staff called out by name across nearly every positive review.</li>
+    <li><strong>All 3 lower-rated reviews target the omakase</strong> — flagging thin fish portions for the price, limited vegetarian protein options, and a cramped seating experience.</li>
+    <li><strong>Pairing presentation is a recurring gap</strong> — guests are not being told what the pairings include or what they cost, consistent with the low 25% attach rate in sales data.</li>
+  </ul>
+</div>
+
+</body>
+</html>
